@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contactless Ordering</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f6f3f3;
+            color: #070707;
+        }
+        
+        header {
+            background-color: #001f3f; /* Navy blue background */
+            color: #f1f0eb;
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 20px;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+        
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        
+        nav ul li a {
+            color:#000000f0; /* White text */
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            padding-bottom: 5px;
+            border-bottom: 2px solid transparent;
+        }
+        
+        nav ul li a:hover {
+            border-bottom: 2px solid #1e1b4b; /* Yellow border on hover */
+        }
+        
+        .menu {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .menu-item {
+            border: 1px solid #e1e0dcf0;
+            margin: 20px;
+            padding: 20px;
+            background-color:#e1e0dcf0;
+            border-radius: 10px;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+            max-width: 300px;
+        }
+        
+        .menu-item:hover {
+            transform: scale(1.05);
+        }
+        
+        .menu-item h3 {
+            margin-top: 0;
+            color: #001f3f; /* Navy blue text */
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .menu-item p {
+            color: #000000;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        .menu-item button {
+            background-color: #2c3a63; /* Yellow button */
+            color: #e1e0dcf0;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+        
+        .menu-item button:hover {
+            background-color: #87b3db; /* Darker yellow on hover */
+        }
+        
+        .cart {
+            background-color:#e1e0dcf0;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+            max-width: 300px;
+            margin: auto;
+            animation: fadeIn 1s ease;
+        }
+        
+        .cart h2 {
+            margin-top: 0;
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        
+        .cart ul {
+            padding: 0;
+            margin: 0;
+        }
+        
+        .cart ul li {
+            list-style: none;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .cart ul li:last-child {
+            margin-bottom: 0;
+        }
+        
+        .cart button {
+            background-color: #242964; /* Navy blue button */
+            color: #e1e0dcf0;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            display: block;
+            margin-top: 20px;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+        
+        .cart button:hover {
+            background-color: #87b3db;; /* Darker navy blue on hover */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>URBAN BITES</h1>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="#snacks">Snacks</a></li>
+            <li><a href="#pizza">Pizza</a></li>
+            <li><a href="#burger">Burger</a></li>
+            <li><a href="#juices">Juices</a></li>
+            <li><a href="#biryani">Biryani</a></li>
+            <li><a href="#shawarma">Shawarma</a></li>
+        </ul>
+    </nav>
+    
+    <main>
+        <div class="menu" id="snacks">
+            <div class="menu-item">
+                <h3>Nachos</h3>
+                <p>Delicious tortilla chips topped with melted cheese, jalapenos, and salsa.</p>
+                <p>Rs.100</p>
+                <button onclick="addToCart('Nachos', 100)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <h3>Chicken Wings</h3>
+                <p>Golden fried chicken wings tossed in your choice of sauce.</p>
+                <p>Rs.150</p>
+                <button onclick="addToCart('Chicken Wings', 150)">Add to Cart</button>
+            </div>
+            <!-- Add more snack items here -->
+        </div>
+        
+        <div class="menu" id="pizza">
+            <div class="menu-item">
+                <h3>Pepperoni Pizza</h3>
+                <p>Classic pizza topped with pepperoni slices and gooey mozzarella cheese.</p>
+                <p>Rs.249</p>
+                <button onclick="addToCart('Pepperoni Pizza', 249)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <h3>Veggie Pizza</h3>
+                <p>Vegetarian pizza loaded with fresh vegetables and savory sauce.</p>
+                <p>Rs.199</p>
+                <button onclick="addToCart('Veggie Pizza', 199)">Add to Cart</button>
+            </div>
+            <!-- Add more pizza items here -->
+        </div>
+        
+        <div class="menu" id="burger">
+            <div class="menu-item">
+                <h3>Classic Burger</h3>
+                <p>Juicy chicken patty served with lettuce, tomato, onion, and pickles on a sesame seed bun.</p>
+                <p>Rs.100</p>
+                <button onclick="addToCart('Classic Burger', 100)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <h3>Chicken Burger</h3>
+                <p>Crispy fried chicken breast served on a toasted bun with mayo and lettuce.</p>
+                <p>Rs.150</p>
+                <button onclick="addToCart('Chicken Burger', 150)">Add to Cart</button>
+            </div>
+            <!-- Add more burger items here -->
+        </div>
+        
+        <div class="menu" id="juices">
+            <div class="menu-item">
+                <h3>Orange Juice</h3>
+                <p>Refreshing orange juice made from freshly squeezed oranges.</p>
+                <p>Rs.40</p>
+                <button onclick="addToCart('Orange Juice', 40)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <h3>Watermelon Juice</h3>
+                <p>Sweet and hydrating watermelon juice perfect for a hot day.</p>
+                <p>Rs.40</p>
+                <button onclick="addToCart('Watermelon Juice', 40)">Add to Cart</button>
+            </div>
+            <!-- Add more juice items here -->
+        </div>
+        
+        <div class="menu" id="biryani">
+            <div class="menu-item">
+                <h3>Chicken Biryani</h3>
+                <p>Flavorful Indian rice dish cooked with aromatic spices and tender chicken.</p>
+                <p>Rs.250</p>
+                <button onclick="addToCart('Chicken Biryani', 250)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <h3>Veg Biryani</h3>
+                <p>Vegetarian biryani made with fragrant basmati rice and assorted vegetables.</p>
+                <p>Rs.170</p>
+                <button onclick="addToCart('Veg Biryani', 170)">Add to Cart</button>
+            </div>
+            <!-- Add more biryani items here -->
+        </div>
+        
+        <div class="menu" id="shawarma">
+            <div class="menu-item">
+                <h3>veg Shawarma</h3>
+                <p>Slices of marinated veggies wrapped in warm pita bread with garlic sauce.</p>
+                <p>Rs.80</p>
+                <button onclick="addToCart('veg Shawarma', 80)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <h3>Chicken Shawarma</h3>
+                <p>Tender chicken shawarma served with hummus, veggies, and tahini sauce.</p>
+                <p>Rs.120</p>
+                <button onclick="addToCart('Chicken Shawarma', 120)">Add to Cart</button>
+            </div>
+            <!-- Add more shawarma items here -->
+        </div>
+        
+        <!-- Add more menu sections and items as needed -->
+        
+        <div class="cart" id="cart">
+            <h2>Cart</h2>
+            <ul id="cart-items">
+                <!-- Cart items will be dynamically added here -->
+            </ul>
+            <button onclick="checkout()">Checkout</button>
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Contactless Ordering. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        // Function to add items to cart
+        function addToCart(itemName, price) {
+            const cartItems = document.getElementById("cart-items");
+            const li = document.createElement("li");
+            li.textContent = `${itemName} - Rs ${price}`;
+            cartItems.appendChild(li);
+        }
+
+        // Function to simulate checkout
+        function checkout() {
+            alert("Thank you for your order!");
+            // You can add further functionality here, like clearing the cart or redirecting to a confirmation page.
+        }
+    </script>
+<script>
+    // Function to add items to cart
+    function addToCart(itemName, price) {
+        const cartItems = document.getElementById("cart-items");
+        const li = document.createElement("li");
+        li.textContent = `${itemName} - Rs ${price}`;
+        cartItems.appendChild(li);
+    }
+
+    // Function to calculate total bill amount
+    function calculateTotal() {
+        const cartItems = document.querySelectorAll("#cart-items li");
+        let total = 0;
+        cartItems.forEach(item => {
+            // Extracting price from the item text
+            const price = parseInt(item.textContent.split("Rs ")[1]);
+            total += price;
+        });
+        return total;
+    }
+
+    // Function to simulate checkout
+    function checkout() {
+        const total = calculateTotal();
+        alert(`Total Bill Amount: Rs ${total}`);
+        alert("Thank you for your order!");
+        // You can add further functionality here, like clearing the cart or redirecting to a confirmation page.
+    }
+</script>
+
+</body>
+</html>
